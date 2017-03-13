@@ -39,6 +39,8 @@ var Thread = function () {
         this.worker.postMessage(data);
     }
 
+    // --------------------------------------------------------------------------------------
+
     function workerCode() {
         onmessage = function (e) {
             var data = JSON.parse(e.data);
