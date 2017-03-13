@@ -31,7 +31,7 @@ var Thread = function () {
     }
 
     Thread.prototype.start = function () {
-        var args = Mahan.utils.arrayize(arguments),
+        var args = [].slice.call(arguments, 0),
             runner = 'function __runner() { return ' + this.function.toString() + '; }',
             url = createUrl(runner),
             data = JSON.stringify({ url: url, args: args });
