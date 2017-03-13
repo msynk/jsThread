@@ -1,0 +1,1 @@
+A Simple sample on how to use WebWorker.
