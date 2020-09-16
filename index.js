@@ -3,17 +3,32 @@ th.addHandler(console.log.bind(console));
 th.addListener(function (result) {
     console.log('result:', result);
 });
-th.start(21000, 19000);
-for (var i = 1; i <= 10; i++) {
-    +function () {
-        setTimeout(console.log.bind(console, 'this is a test' + i), 300 * i);
-    }(i);
+
+function startSync(i, j) {
+    console.log('start');
+    console.log(processHeavyFunction(i, j));
+    for (var i = 1; i <= 10; i++) {
+        +function () {
+            setTimeout(console.log.bind(console, 'this is a test' + i), 300 * i);
+        }(i);
+    }
+    console.log('end');
 }
-console.log('end');
+
+function startAsync(i, j) {
+    console.log('start');
+    th.start(i, j);
+    for (var i = 1; i <= 10; i++) {
+        +function () {
+            setTimeout(console.log.bind(console, 'this is a test' + i), 300 * i);
+        }(i);
+    }
+    console.log('end');
+}
 
 function processHeavyFunction(i, j) {
-    var i = i || 10000,
-        j = j || 10000,
+    var i = i || 30000,
+        j = j || 20000,
         result = 0;
 
     for (var x = 1; x <= i; x++) {
